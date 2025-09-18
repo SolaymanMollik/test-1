@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Login</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Customer Login</h2>
+      <form>
+        <label for="name">Name*</label>
+        <input type="text" id="name" name="name" required />
+        <label for="mobile">Mobile*</label>
+        <input type="tel" id="mobile" name="mobile" required />
+
+        <label for="whatsapp">WhatsApp (Optional)</label>
+        <input type="tel" id="whatsapp" name="whatsapp" />
+
+        <label for="company">Company / Shop Name (Optional)</label>
+        <input type="text" id="company" name="company" />
+
+        <label for="division">Division*</label>
+        <select id="division" name="division" required>
+          <option value="">Select Division</option>
+          <option value="barishal">Barishal</option>
+          <option value="b">B</option>
+          <!-- আরও যোগ করতে পারবেন -->
+        </select>
+
+        <label for="zila">District*</label>
+        <select id="zila" name="zila" required>
+          <option value="">Select District</option>
+          <option value="jhalokati">Jhalokati</option>
+          <option value="barishal">Barishal</option>
+          <option value="pirojpur">Pirojpur</option>
+        </select>
+
+        <label for="upozila">Upazila*</label>
+        <select id="upozila" name="upozila" required>
+          <option value="">Select Upazila</option>
+        </select>
+        <label for="address">Delivery Address*</label>
+        <textarea id="address" name="address" required></textarea>
+
+        <label for="postcode">Post Code*</label>
+        <input type="text" id="postcode" name="postcode" required />
+
+        <button type="submit">Next</button>
+      </form>
+    </div>
+
+    <script></script>
+    <script type="module" src="locationData.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
