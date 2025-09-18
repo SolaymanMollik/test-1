@@ -20,7 +20,6 @@ function showPreview(x) {
   let prevDiscount = document.getElementById('prevDiscount');
   let prevSubTotal = document.getElementById('prevSubTotal');
   let prevDiscountAmount = document.getElementById('prevDiscountAmount');
-  let prevBrand = document.getElementById('prevBrand');
   // btn
   let nextBtn = document.getElementById('nextBtn');
   // discount
@@ -59,7 +58,6 @@ function showPreview(x) {
 
   // calculate totals
   let total = price * quantity;
-  console.log(total, price, quantity);
   let subTotal = total - (total / 100) * discount;
   let disAmount = (total / 100) * discount;
 

@@ -6,24 +6,27 @@ export let prices = (product, quantity) => {
   let price = 0;
 
   if (product === '1') {
-    if (quantity >= 144 && quantity <= 240) price = 17; // 6-10 cases
-    else if (quantity <= 456) price = 16; // 11-19 cases
-    else if (quantity <= 576) price = 15; // 20-24 cases
-    else if (quantity <= 696) price = 14.5; // 25-29 cases
-    else if (quantity > 720) price = 13.5; // 30+ cases
+    if (144 <= quantity && quantity <= 240) price = 17; // 6-10 cases
+    else if (240 < quantity && quantity <= 456) price = 16; // 11-19 cases
+    else if (456 < quantity && quantity <= 576) price = 15; // 20-24 cases
+    else if (576 < quantity && quantity <= 696) price = 14.5; // 25-29 cases
+    else if (696 < quantity) price = 13.5; // 30+ cases
+    else price = 'NaN';
   } else if (product === '2') {
-    if (quantity >= 120 && quantity <= 180) price = 18;
-    else if (quantity <= 240) price = 15;
-    else if (quantity <= 360) price = 14.4;
-    else if (quantity > 360) price = 13.8;
+    if (120 <= quantity && quantity <= 192) price = 25; // 10-16 cases
+    else if (192 < quantity && quantity <= 300) price = 24; // 17-25 cases
+    else if (300 < quantity && quantity <= 360) price = 23.54; // 26-30 cases
+    else if (360 < quantity) price = 22.5; // 31+ cases
+    else price = 'NaN';
   } else if (product === '3') {
-    if (quantity < 240) price = 18;
-    else if (quantity <= 360) price = 15;
-    else if (quantity <= 480) price = 14.4;
-    else if (quantity <= 600) price = 13.8;
-    else if (quantity <= 960) price = 13;
-    else if (quantity <= 1440) price = 12.5;
-    else price = 12;
+    // currently not in use
   }
   return Number(price);
 };
+
+/**
+ * 10-16 25
+ * 17-25 24
+ * 26-30 23.5
+ * 31+ 22.5
+ */

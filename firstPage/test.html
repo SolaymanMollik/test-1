@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quotation Form</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0f0f0f, #1e1e1e);
+        margin: 0;
+        padding: 0;
+        color: #f1f1f1;
+      }
+
+      .form-container {
+        max-width: 950px;
+        margin: 30px auto;
+        background: #111;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        transition: transform 0.3s ease-in-out;
+      }
+      .form-container:hover {
+        transform: translateY(-3px);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        color: #ccc;
+      }
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        font-size: 15px;
+        background: #1b1b1b;
+        color: #fff;
+        outline: none;
+        transition: border 0.3s, background 0.3s;
+      }
+      input {
+        width: 97%;
+        padding: 12px 14px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        font-size: 15px;
+        background: #1b1b1b;
+        color: #fff;
+        outline: none;
+        transition: border 0.3s, background 0.3s;
+      }
+      select:focus,
+      input:focus,
+      textarea:focus {
+        border: 1px solid #00bfff;
+        background: #2a2a2a;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #888;
+      }
+
+      .btn-div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .btn-preview {
+        flex: 1;
+        background: #0d6efd;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s;
+        text-align: center;
+      }
+      .btn-preview:hover {
+        background: #0b5ed7;
+      }
+      .btn-close {
+        margin-top: 15px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background: #dc3545;
+        color: white;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .btn-close:hover {
+        background: #bb2d3b;
+      }
+
+      .popup-overla {
+        position: relative;
+        width: 100%;
+        margin-top: 25px;
+        display: flex; /* ✅ সবসময় visible */
+        justify-content: center;
+      }
+      .popup-bo {
+        background: #1f1f1f;
+        padding: 20px;
+        border-radius: 14px;
+        width: 100%;
+        max-width: 100%;
+        text-align: left;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        color: #fff;
+        animation: fadeIn 0.4s ease-in-out;
+      }
+      .popup-bo h3 {
+        margin-top: 0;
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #00bfff;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+      }
+      .popup-bo p {
+        margin: 8px 0;
+        font-size: 15px;
+        line-height: 1.4;
+      }
+      #makeFlex {
+        flex-wrap: wrap;
+        display: flex;
+        gap: 10px;
+      }
+      #makeFlex > p {
+        width: 48%;
+      }
+      #makeFlex > h3 {
+        width: 100%;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .btn-div {
+          flex-direction: column;
+        }
+        .btn-preview {
+          width: 100%;
+        }
+        #makeFlex > p {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mainContainer1">
+      <div class="form-container">
+        <div class="popup-overla" id="popup">
+          <div class="popup-bo" id="makeFlex">
+            <h3>Quotation Preview</h3>
+            <br />
+            <p><strong>Product Size:</strong> <span id="prevProduct"></span></p>
+            <p><strong>Quantity:</strong> <span id="prevQuantity"></span></p>
+            <p><strong>price per pcs:</strong> <span id="prevPrice"></span></p>
+            <p><strong>Total:</strong> <span id="prevTotal"></span></p>
+            <p><strong>Refer Code:</strong> <span id="prevRefer"></span></p>
+            <p><strong>Discount:</strong> <span id="prevDiscount"></span></p>
+            <p>
+              <strong>Discount Amount:</strong>
+              <span id="prevDiscountAmount"></span>
+            </p>
+            <p><strong>Sub Total:</strong> <span id="prevSubTotal"></span></p>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div
+          style="
+            width: 100%;
+            height: 1px;
+            background-color: #333;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+          "
+        ></div>
+
+        <!-- Product Select -->
+        <div class="form-group">
+          <label for="product">Select Product Size</label>
+          <select id="product" class="show">
+            <option value="1">500ml</option>
+            <option value="2">1 Litre</option>
+          </select>
+        </div>
+
+        <div class="form-group" hidden>
+          <label for="product">Select Product Brand</label>
+          <select id="productBrand" class="show" value="fizan">
+            <option value="mum">Mum</option>
+            <option value="fizan">Fizan</option>
+            <option value="jibon">Jibon</option>
+            <option value="pran">Pran</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input
+            type="number"
+            id="quantity"
+            class="show"
+            placeholder="Enter total quantity minimum 6 cases"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="refer">Refer Code</label>
+          <input
+            type="text"
+            class="show"
+            id="refer"
+            placeholder="Optional refer code"
+          />
+        </div>
+
+        <!-- Preview Button -->
+        <div class="btn-div">
+          <button type="button" class="btn-preview" id="prevBtn">Prev</button>
+          <button type="button" class="btn-preview" id="nextBtn">Next</button>
+        </div>
+      </div>
+
+      <!-- External JS -->
+      <script type="module" src="../refarerData.js"></script>
+      <script type="module" src="../price.js"></script>
+      <script type="module" src="app.js"></script>
+      <script type="module" src="next.js"></script>
+    </div>
+  </body>
+</html>
