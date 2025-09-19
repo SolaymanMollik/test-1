@@ -10,7 +10,6 @@ function showPreview(x) {
   let product = document.getElementById('product').value;
   let getQuantity = Number(document.getElementById('quantity').value);
   let refer = document.getElementById('refer').value;
-  // let productBrand = document.getElementById('productBrand').value;
   // preview elements
   let prevProduct = document.getElementById('prevProduct');
   let prevQuantity = document.getElementById('prevQuantity');
@@ -53,6 +52,20 @@ function showPreview(x) {
     caseQun = 6;
   }
 
+  /**
+   * if quantity less than minimum
+   */
+
+  if (
+    (product == '1' && getQuantity < 6) ||
+    (product == '2' && getQuantity < 10) ||
+    product == '0'
+  ) {
+    nextBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = 'inline-block';
+  }
+
   // pricing
   let price = prices(product, quantity);
 
@@ -62,7 +75,9 @@ function showPreview(x) {
   let disAmount = (total / 100) * discount;
 
   // update preview
-  prevProduct.innerHTML = product + ' Liter';
+  prevProduct.innerHTML = `${
+    product == '1' ? '500ml' : product == '2' ? '1 Liter' : ''
+  }`;
   prevQuantity.innerHTML = `${getQuantity} case x ${caseQun} pcs = ${quantity} pcs`;
   // prevBrand.innerHTML = productBrand;
   prevPrice.innerHTML = price;
@@ -77,7 +92,6 @@ function showPreview(x) {
   if (x == 'save') {
     let orderData = {
       product: product + ' Liter',
-      productBrand: productBrand,
       quantity: quantity,
       price: price,
       total: total,
@@ -93,6 +107,8 @@ function showPreview(x) {
     console.log('Order Saved:', orderData);
   }
 }
+// default call
+showPreview();
 /**
  * call the show preview btn
  */
@@ -106,10 +122,70 @@ document
 document
   .getElementById('refer')
   .addEventListener('input', (x) => showPreview());
-document
-  .getElementById('productBrand')
-  .addEventListener('input', (x) => showPreview());
+
 nextBtn.addEventListener('click', () => {
+  console.log('ok');
+
   showPreview('save');
+
+  if (
+    localStorage.getItem('userData') === null ||
+    localStorage.getItem('userData') === '' ||
+    localStorage.getItem('userData') === undefined ||
+    !localStorage.getItem('userData')
+  ) {
+    window.location.href = `http://127.0.0.1:5500/loginPage/index.html`;
+    return;
+  }
+
   setTimeout(check(), 5000);
 });
+
+/**
+ * if user came from offer page
+ * then auto fill the form
+ */
+
+window.onload = () => {
+  /**
+   * save to store ref is true or false
+   */
+
+  localStorage.setItem('ref', 'false');
+
+  const isFromOffer = location.href.includes('ref=');
+  if (isFromOffer) {
+    localStorage.setItem('ref', 'true');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get('ref');
+    console.log(refCode);
+    document.getElementById('refer').value = refCode;
+
+    /**
+     * add data for inputs
+     */
+
+    const getProductSize = urlParams.get('size');
+    const getQuantity = urlParams.get('qun');
+
+    document.getElementById('product').value =
+      getProductSize == '500' ? '1' : getProductSize == '1000' ? '2' : '0';
+    document.getElementById('quantity').value = getQuantity ? getQuantity : 0;
+
+    /**
+     * disable all input
+     */
+
+    showPreview();
+    let inp = document.getElementsByTagName('input');
+    let sel = document.getElementsByTagName('select');
+    for (let i = 0; i < sel.length; i++) {
+      sel[i].disabled = true;
+    }
+
+    for (let i = 0; i < inp.length; i++) {
+      inp[i].disabled = true;
+    }
+  }
+};

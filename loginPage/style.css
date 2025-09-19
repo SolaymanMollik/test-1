@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #000000, #1a1a1a, #0d0d0d);
+  background: black;
   color: #eaeaea;
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@ body {
   padding: 25px;
   border-radius: 12px;
   width: 100%;
-  max-width: 80vw;
+  max-width: 90vw;
 }
 h2 {
   text-align: center;
@@ -46,6 +46,11 @@ button {
   border-radius: 6px;
   font-size: 14px;
 }
+
+select {
+  width: 101% !important;
+}
+
 input,
 select,
 textarea {
@@ -60,13 +65,18 @@ textarea:focus {
   background-color: #333333;
 }
 button {
-  width: 98%;
+  width: 101% !important;
   background: linear-gradient(90deg, #4cafef, #2196f3);
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
   border-radius: 6px;
+  padding: 10px;
+
+  margin-bottom: 15px;
+  border: none;
+  font-size: 14px;
 }
 button:hover {
   background: linear-gradient(90deg, #2196f3, #1976d2);

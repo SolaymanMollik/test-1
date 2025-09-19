@@ -1,13 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Durga Puja Custom Label Service</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Noto Serif Bengali', serif;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+          url('https://i.postimg.cc/Pqths0Jr/prithivi-das-4-DCMWzu-AI6-A-unsplash.jp')
+            no-repeat center center/cover;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      .container {
+        max-width: 750px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        border-radius: 25px;
+        backdrop-filter: blur(2px);
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        animation: fadeIn 2s ease;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #ffd700;
+        text-shadow: 3px 3px 8px #000;
+        animation: slideDown 2s ease;
+      }
+
+      p {
+        font-size: 1.25rem;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        animation: fadeIn 3s ease;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 15px 50px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(45deg, #e63946, #ff5733);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .btn::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: skewX(-45deg);
+        transition: 0.5s;
+      }
+
+      .btn:hover {
+        transform: scale(1.08);
+      }
+
+      .btn:hover::after {
+        left: 200%;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.2rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+        .btn {
+          padding: 12px 10px 5px 10px;
+          margin: 0.5rem 1rem;
+          font-size: 1rem;
+          width: 100%;
+          height: 50px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <script>
-      window.location.href = 'firstPage/index.html';
-    </script>
+    <div class="container">
+      <h2>শুভ দুর্গা পূজা</h2>
+      <p>
+        মায়ের আগমনে হৃদয়ে আসুক সুখ-সমৃদ্ধি ও শান্তি। এই পূজায় আপনার
+        <b>ব্যবসা বা প্রোডাক্ট</b> দিন উৎসবের এক অনন্য রূপ। আমাদের
+        <b>কাস্টম লেবেল সার্ভিস</b> আপনার ব্র্যান্ডকে করে তুলবে আরও আকর্ষণীয় ও
+        স্মরণীয়।
+      </p>
+      <a href="offer.html" class="btn">✨ Offers ✨</a>
+      <a href="firstPage/index.html" class="btn">✨ Get Quotation ✨</a>
+    </div>
   </body>
 </html>
