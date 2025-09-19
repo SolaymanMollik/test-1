@@ -72,7 +72,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
    * assing to quatation form
    */
   let getQut = () => {
-    window.location.href = 'http://127.0.0.1:5500/index.html';
+    window.location.href = 'https://solaymanmollik.github.io/test-1/index.html';
   };
   setTimeout(getQut, 1000);
 });

@@ -134,7 +134,7 @@ nextBtn.addEventListener('click', () => {
     localStorage.getItem('userData') === undefined ||
     !localStorage.getItem('userData')
   ) {
-    window.location.href = `http://127.0.0.1:5500/loginPage/index.html`;
+    window.location.href = `https://solaymanmollik.github.io/test-1/loginPage/index.html`;
     return;
   }
 
