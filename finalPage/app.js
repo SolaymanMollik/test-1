@@ -1,90 +1,109 @@
-const mainFunction = () => {
-  let userName = document.getElementById('name');
-  let phn = document.getElementById('phn');
-  let waNum = document.getElementById('waNum');
-  let address = document.getElementById('address');
-  let post = document.getElementById('post');
-  let division = document.getElementById('division');
-  let zila = document.getElementById('zila');
-  let upozila = document.getElementById('upozila');
-  let company = document.getElementById('company');
-  let size = document.getElementById('size');
-  let brand = document.getElementById('brand');
-  let qun = document.getElementById('qun');
-  let pcs = document.getElementById('pcs');
-  let total = document.getElementById('total');
-  let dis = document.getElementById('dis');
-  let disAmount = document.getElementById('disAmount');
-  let delCrg = document.getElementById('delCrg');
-  let subTotal = document.getElementById('subTotal');
-  let rCode = document.getElementById('rCode');
+if (
+  localStorage.getItem('userData') === null ||
+  localStorage.getItem('userData') === '' ||
+  localStorage.getItem('userData') === undefined ||
+  !localStorage.getItem('userData')
+) {
+  console.log('no user data found');
 
-  /**
-   * get lastOrder and userData from local storage and set to the fields
-   */
+  if (!window.location.href.includes('5500')) {
+    window.location.href = `https://solaymanmollik.github.io/test-1/loginPage/index.html`;
+  } else {
+    window.location.href = `http://127.0.0.1:5500/loginPage/index.html`;
+  }
+} else {
+  console.log('inn');
 
-  // user details
+  const mainFunction = () => {
+    let userName = document.getElementById('name');
+    let phn = document.getElementById('phn');
+    let waNum = document.getElementById('waNum');
+    let address = document.getElementById('address');
+    let post = document.getElementById('post');
+    let division = document.getElementById('division');
+    let zila = document.getElementById('zila');
+    let upozila = document.getElementById('upozila');
+    let company = document.getElementById('company');
+    let size = document.getElementById('size');
+    let qun = document.getElementById('qun');
 
-  let lastOrder = JSON.parse(localStorage.getItem('lastOrder'));
-  let userData = JSON.parse(localStorage.getItem('userData'));
+    let subTotal = document.getElementById('subTotal');
 
-  userName.innerHTML = userData.name;
-  phn.innerHTML = userData.mobile;
-  waNum.innerText = userData.whatsapp || 'N/A';
+    /**
+     * get all url parameters
+     * is product , qun , price pcs, subTotal
+     */
 
-  address.innerHTML = userData.address;
-  post.innerHTML = userData.postcode;
-  division.innerHTML = userData.division;
-  zila.innerText = userData.zila;
-  upozila.innerHTML = userData.upozila;
-  company.innerHTML = userData.company || 'N/A';
+    /**
+     * save to store ref is true or false
+     */
 
-  let assUserData = JSON.parse(localStorage.getItem('userData'));
-  let assLastOrder = JSON.parse(localStorage.getItem('lastOrder'));
+    localStorage.setItem('ref', 'true');
 
-  console.log(assLastOrder);
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get('ref');
 
-  // order details
+    /**
+     * add data for inputs
+     */
 
-  size.innerHTML = lastOrder.product;
-  brand.innerHTML = lastOrder.productBrand;
-  qun.innerHTML = lastOrder.quantity;
-  pcs.innerHTML = lastOrder.price;
-  total.innerHTML = lastOrder.total;
-  dis.innerHTML = lastOrder.discount + '%';
-  disAmount.innerHTML = lastOrder.disAmount;
-  delCrg.innerHTML = lastOrder.delCharge || 0;
-  subTotal.innerHTML = lastOrder.subTotal;
-  rCode.innerHTML = lastOrder.refer || 'N/A';
+    const getProductSize = urlParams.get('size');
+    const getQuantity = urlParams.get('qun');
+    const getPrice = urlParams.get('price');
+    const getSubTotal = urlParams.get('subTotal');
+    console.log(getProductSize, getQuantity, getPrice, getSubTotal);
 
-  // form submission
+    size.innerText =
+      getProductSize == '500' ? '500ml' : getProductSize == '1000' ? '2' : '0';
+    qun.innerHTML = `${getQuantity ? getQuantity : 0} cases / ${
+      Number(getQuantity) * 24
+    } pcs`;
+    pcs.innerHTML = `${getPrice ? getPrice : 0} BDT`;
+    document.getElementById('subTotal').value = getSubTotal ? getSubTotal : 0;
+    subTotal.innerHTML = getSubTotal ? getSubTotal : 0;
 
-  let allData =
-    `https://solaymanmollik.github.io/userOrder?` +
-    `name=${encodeURIComponent(userData.name)}&` +
-    `phone=${encodeURIComponent(userData.mobile)}&` +
-    `whatsapp=${encodeURIComponent(userData.whatsapp || 'N/A')}&` +
-    `address=${encodeURIComponent(userData.address)}&` +
-    `postcode=${encodeURIComponent(userData.postcode)}&` +
-    `division=${encodeURIComponent(userData.division)}&` +
-    `zila=${encodeURIComponent(userData.zila)}&` +
-    `upozila=${encodeURIComponent(userData.upozila)}&` +
-    `brandName=${encodeURIComponent(userData.company || 'N/A')}&` +
-    `product=${encodeURIComponent(lastOrder.product)}&` +
-    `productBrand=${encodeURIComponent(lastOrder.productBrand)}&` +
-    `quantity=${encodeURIComponent(lastOrder.quantity)}&` +
-    `price=${encodeURIComponent(lastOrder.price)}&` +
-    `total=${encodeURIComponent(lastOrder.total)}&` +
-    `discount=${encodeURIComponent(lastOrder.discount + '%')}&` +
-    `discountAmount=${encodeURIComponent(lastOrder.disAmount)}&` +
-    `deliveryCharge=${encodeURIComponent(lastOrder.delCharge || 0)}&` +
-    `subTotal=${encodeURIComponent(lastOrder.subTotal)}&` +
-    `referCode=${encodeURIComponent(lastOrder.refer || 'N/A')}`;
+    /**
+     * get userData from local storage and set to the fields
+     */
 
-  console.log(allData);
+    // user details
 
-  let submitForm = document.getElementById('submitForm');
-  submitForm.innerHTML = `
+    let userData = JSON.parse(localStorage.getItem('userData'));
+
+    userName.innerHTML = userData.name;
+    phn.innerHTML = userData.mobile;
+    waNum.innerText = userData.whatsapp || 'N/A';
+    address.innerHTML = userData.address;
+    post.innerHTML = userData.postcode;
+    division.innerHTML = userData.division;
+    zila.innerText = userData.zila;
+    upozila.innerHTML = userData.upozila;
+    company.innerHTML = userData.company || 'N/A';
+
+    // form submission
+
+    let allData =
+      `https://solaymanmollik.github.io/userOrder?` +
+      `name=${encodeURIComponent(userData.name)}&` +
+      `phone=${encodeURIComponent(userData.mobile)}&` +
+      `whatsapp=${encodeURIComponent(userData.whatsapp || 'N/A')}&` +
+      `address=${encodeURIComponent(userData.address)}&` +
+      `postcode=${encodeURIComponent(userData.postcode)}&` +
+      `division=${encodeURIComponent(userData.division)}&` +
+      `zila=${encodeURIComponent(userData.zila)}&` +
+      `upozila=${encodeURIComponent(userData.upozila)}&` +
+      `brandName=${encodeURIComponent(userData.company || 'N/A')}&` +
+      `product=${encodeURIComponent(getProductSize)}&`;
+    `qun=${encodeURIComponent(getQuantity)}&`;
+    `price=${encodeURIComponent(getPrice)}&`;
+    `subTotal=${encodeURIComponent(getSubTotal)}&`;
+
+    let submitForm = document.getElementById('submitForm');
+
+    console.log(allData);
+
+    console.log(submitForm);
+    submitForm.innerHTML = `
     <!-- Hidden fields -->
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_subject" value="নতুন ফর্ম সাবমিশন এসেছে!" />
@@ -93,6 +112,7 @@ const mainFunction = () => {
       <button type="submit">Submit</button>
   
   `;
-};
+  };
 
-mainFunction();
+  mainFunction();
+}
